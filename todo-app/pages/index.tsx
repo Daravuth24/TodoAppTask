@@ -54,7 +54,7 @@ const Home = () => {
   return (
   <div className="w-3/4 mx-auto text-center">
     
-    <h1 className="text-4xl">TODO App</h1>
+    <h1 className="text-5xl">TODO App</h1>
 
       <div className="pt-12">
         <input 
