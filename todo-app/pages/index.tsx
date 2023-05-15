@@ -1,19 +1,30 @@
 import cx from 'classnames';
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { atom, useRecoilState, RecoilRoot } from 'recoil';
 
 import styles from '.../styles/Home.module.css'
 
-const Home = () => {
-  
-  const [todoItem, setTodoItem] = useState("");
-  const [items, setItems] = useState([
+export const todoItemState = atom({
+  key: 'todoItemState',
+  default: '',
+});
+
+export const itemsState = atom({
+  key: 'itemsState',
+  default: [
     {
       id: '1234',
-      message: "Buy Milk",
+      message: 'Buy Milk',
       done: false,
-    }
-  ]);
+    },
+  ],
+});
+
+const Home = () => {
+  
+  const [todoItem, setTodoItem] = useRecoilState(todoItemState);
+  const [items, setItems] = useRecoilState(itemsState);
 
   const handleAdd = () => {
     if (todoItem) {
@@ -54,7 +65,7 @@ const Home = () => {
   return (
   <div className="w-3/4 mx-auto text-center">
     
-    <h1 className="text-4xl">TODO App</h1>
+    <h1 className="text-5xl">TODO App</h1>
 
       <div className="pt-12">
         <input 
@@ -80,5 +91,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+const App = () => {
+  return (
+    <RecoilRoot>
+      <Home />
+    </RecoilRoot>
+  )
+}
+export default App;
 
